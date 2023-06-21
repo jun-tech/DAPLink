@@ -83,3 +83,49 @@ STM32有2个跳线帽
 如果你使用USB转串口方式烧录，配置此选项
 
 ![image-20230405204041697](.\images\image-20230405204041697.png)
+
+
+
+# OpenOCD编译Win10
+
+- openocd-code官方下载
+
+《How to Build OpenOCD and Picotool for the Raspberry Pi Pico on Windows - Shawn Hymel.html》
+
+安装并打开mingw64.exe
+
+```shell
+# 更新系统文件
+$ pacman -Syuu
+# 安装库win64
+$ pacman -S libtool autoconf automake texinfo pkg-config make autogen git unzip bzip2 base-devel mingw-w64-x86_64-toolchain mingw-w64-x86_64-libusb mingw-w64-x86_64-libusb-compat-git mingw-w64-x86_64-hidapi mingw-w64-x86_64-libftdi</div><div>   mingw-w64-x86_64-arm-none-eabi-gcc mingw-w64-x86_64-capstone
+# 下载openocd，保存了一份openocd
+$ git clone https://git.code.sf.net/p/openocd/code openocd-code
+$ cd openocd-code
+$ mkdir build
+$ ./bootstrap
+$ cd build
+$ ../configure --enable-ftdi
+$ make
+$ make install
+# 新建bin目录，抽取放到可执行文件。从build/src里拷贝openocd.exe到bin
+$ cd ..
+$ mkdir bin
+$ cp build/src/openocd.exe bin/
+```
+
+最后把其它依赖dll（从mysys64安装目录D:\msys64\mingw64\bin中获取依赖bin）复制到bin下
+
+- openocd树莓派官网下载
+
+《(5条消息) [开发工具]Windows下编译OpenOCD过程分享（基于MSYS2）_windows openocd_21ic电子工程师的博客-CSDN博客.html》
+
+跟上面类似，只是configure有所区别，注意要加上--disable-werror
+
+```shell
+...
+$ git clone https://github.com/raspberrypi/openocd.git --branch picoprobe --depth=1
+...
+$ ./configure --enable-picoprobe --enable-cmsis-dap --enable-cmsis-dap-v2 --disable-werror
+...
+```
