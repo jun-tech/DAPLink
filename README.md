@@ -129,3 +129,42 @@ $ git clone https://github.com/raspberrypi/openocd.git --branch picoprobe --dept
 $ ./configure --enable-picoprobe --enable-cmsis-dap --enable-cmsis-dap-v2 --disable-werror
 ...
 ```
+
+# VS+PlatformIO+Ardunio调试
+
+STM32F103C6T6调试，见项目，主要配置platformio.ini
+
+另外2处地方要修改
+
+- genericSTM32F103C6.json
+
+D:\Users\Administrator\.platformio\platforms\ststm32\boards\genericSTM32F103C6.json
+
+![](images\iocfg1.jpg)
+
+- cmsis-dap.cfg
+
+  报错时
+
+  ![](images\dapv2err.jpg)
+
+  解决方法：
+
+  增加 **cmsis_dap_backend hid**
+
+  ![](images\iocfg2.jpg)
+
+- 树莓派pico调试
+
+  | Pin RP Pico                        | Pin DAP   |
+  | ---------------------------------- | --------- |
+  | **“DEBUG” “SWCLK”**                | **SWCLK** |
+  | **“DEBUG” “GND”**                  | **GND**   |
+  | **“DEBUG” “SWDIO”**                | **SWDIO** |
+  | **“3V3” Pad 36**（右侧第5个脚3v3） | **VCC**   |
+  
+  ![](images\rp2040line.jpg)
+  
+  原来配置rp2040.cfg，发现D:\Users\Administrator\.platformio\packages\tool-openocd\scripts\target并没有rp2040.cfg配置，只有rp2040-core0.cfg，更正过来后正常调试
+  
+  ![](images\rp2040.jpg)
