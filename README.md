@@ -154,6 +154,10 @@ D:\Users\Administrator\.platformio\platforms\ststm32\boards\genericSTM32F103C6.j
 
   ![](images\iocfg2.jpg)
 
+  Linux
+
+  /home/jun/.platformio/packages/tool-openocd-raspberrypi/share/openocd/scripts/interface
+
 - 树莓派pico调试
 
   | Pin RP Pico                        | Pin DAP   |
