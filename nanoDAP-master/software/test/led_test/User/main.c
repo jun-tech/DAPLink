@@ -77,6 +77,34 @@
 #include "led.h"
 #include "delay.h"
 
+#include <stdio.h>  
+  
+#define ITM_Port8(n)    (*((volatile unsigned char *)(0xE0000000+4*n)))  
+#define ITM_Port16(n)   (*((volatile unsigned short*)(0xE0000000+4*n)))  
+#define ITM_Port32(n)   (*((volatile unsigned long *)(0xE0000000+4*n)))  
+#define DEMCR           (*((volatile unsigned long *)(0xE000EDFC)))  
+#define TRCENA          0x01000000  
+  
+  
+//半主机模式必须定义这个  
+struct __FILE  
+{  
+    int handle;  
+};  
+FILE __stdout;  
+FILE __stdin;  
+  
+int fputc(int ch, FILE *f)  
+{  
+    if (DEMCR & TRCENA)  
+    {  
+        while (ITM_Port32(0) == 0);  
+  
+        ITM_Port8(0) = ch;  
+    }  
+    return(ch);  
+}  
+
 int  main()
 {
 	LED_Init(); //LED初始化
@@ -87,6 +115,8 @@ while(1)
 		delay_ms(300); //亮灯大约1秒
 		GPIO_SetBits(GPIOC,GPIO_Pin_13);		//LED熄灭
 		delay_ms(300); //熄灭灯大约1秒
+		
+		printf("Hello world！\r\n");
 	}   
 }
 

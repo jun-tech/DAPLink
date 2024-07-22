@@ -169,6 +169,6 @@ D:\Users\Administrator\.platformio\platforms\ststm32\boards\genericSTM32F103C6.j
   
   ![](images\rp2040line.jpg)
   
-  原来配置rp2040.cfg，发现D:\Users\Administrator\.platformio\packages\tool-openocd\scripts\target并没有rp2040.cfg配置，只有rp2040-core0.cfg，更正过来后正常调试
+  原来配置rp2040.cfg，发现D:\Users\Administrator\.platformio\packages\tool-openocd\scripts\target并没有rp2040.cfg配置，只有rp2040-core0.cfg，更正过来后正常调试，或者拷贝一份E:\DAPLink\openocd\tcl\target\rp2040.cfg到对应目录
   
   ![](images\rp2040.jpg)
