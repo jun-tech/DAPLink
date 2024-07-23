@@ -98,7 +98,7 @@ STM32有2个跳线帽
 # 更新系统文件
 $ pacman -Syuu
 # 安装库win64
-$ pacman -S libtool autoconf automake texinfo pkg-config make autogen git unzip bzip2 base-devel mingw-w64-x86_64-toolchain mingw-w64-x86_64-libusb mingw-w64-x86_64-libusb-compat-git mingw-w64-x86_64-hidapi mingw-w64-x86_64-libftdi</div><div>   mingw-w64-x86_64-arm-none-eabi-gcc mingw-w64-x86_64-capstone
+$ pacman -S libtool autoconf automake texinfo pkg-config make autogen git unzip bzip2 base-devel mingw-w64-x86_64-toolchain mingw-w64-x86_64-libusb mingw-w64-x86_64-libusb-compat-git mingw-w64-x86_64-hidapi mingw-w64-x86_64-libftdi mingw-w64-x86_64-arm-none-eabi-gcc mingw-w64-x86_64-capstone
 # 下载openocd，保存了一份openocd
 $ git clone https://git.code.sf.net/p/openocd/code openocd-code
 $ cd openocd-code
@@ -129,6 +129,15 @@ $ git clone https://github.com/raspberrypi/openocd.git --branch picoprobe --dept
 $ ./configure --enable-picoprobe --enable-cmsis-dap --enable-cmsis-dap-v2 --disable-werror
 ...
 ```
+
+清除make文件，重新编译可以使用下面的命令
+
+```shell
+make clean #清除上一次make命令生成的文件
+make distclean #清除上一次make以及configure命令生成的文件
+```
+
+
 
 # VS+PlatformIO+Ardunio调试
 
